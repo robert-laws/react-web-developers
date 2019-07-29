@@ -1,26 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import Movie from './components/Movie';
+import MovieForm from './components/MovieForm';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  state = {
+    title: '',
+    director: '',
+    click: false
+  }
+
+  handleMovieSubmit = (title, director) => {
+    this.setState({
+      title,
+      director
+    })
+  }
+
+  updateClick = () => {
+    this.setState({
+      click: !this.state.click
+    })
+  }
+
+  render() {
+    return (
+      <div>
+        <h2>App...</h2>
+        <MovieForm onMovieSubmit={this.handleMovieSubmit} />
+        <Movie title={this.state.title} director={this.state.director} />
+        <div>
+          Click: {this.state.click.toString()}
+        </div>
+        <button onClick={this.updateClick}>Update Click</button>
+      </div>
+    )
+  }
 }
 
 export default App;
